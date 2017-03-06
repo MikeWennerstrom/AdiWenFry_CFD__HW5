@@ -36,11 +36,37 @@ void getCenterPoints(vector<vector<double> > & X_cp, vector<vector<double> > & Y
 			// Get averages of cell normals
 			// These indices will most likely need to change when this part of the code
 			// and the normal calculations are combined
+            //**** These need to have x and y components, but I need to find out how we are doing this ****//
 			D_S_i[i-1][j-1] = 0.5*(Normals_X[i-1][j] + Normals_X[i][j])
 			D_S_j[i-1][j-1] = 0.5*(Normals_Y[i][j-1] + Normals_Y[i][j])
-		
 		}
 	}
+}
+
+
+
+
+// Assuming that CFL is a global variable
+double getTau(double c_ij, double u_ij, double v_ij, double dsi_x, double dsi_y, double dsj_x, double dsj_y){
+    double abs1, abs2, cu_, cv_
+    double tau_ij
+    
+    cu_ = c_ij + u_ij
+    cv_ = c_ij + v_ij
+    abs1 = abs(cu_*dsi_x + cv_*dsi_y)
+    abs2 = abs(cu_*dsj_x + cv_*dsj_y)
+    
+    tau_ij = CFL/(abs1+abs2)
+    
+    return tau_ij
+    
+    // sum velocity and speed of sound
+    // take the dot product of that vector and the normal
+    // take the absolute value of that dot product
+    // sum the two absolute values
+    // Divide the CFL number by that sum
+    // This is Tau
+    // That should be done for each cell.
 }
 		
 		
