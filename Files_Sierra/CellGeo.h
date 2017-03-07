@@ -7,7 +7,9 @@
 #ifndef CELLGEO_H
 #define CELLGEO_H
 #include <math.h>
-#include <vector.h>
+#include <vector>
+
+using namespace std;
 
 class cellGeo{
     // For each cell, we need: edge definitions, centerpoints, indices, areas, normals
@@ -30,7 +32,7 @@ class cellGeo{
     vector<double> getNormal(double x1, double x2, double y1, double y2);      // Mike wrote this code
     vector<double> getNormalCenter(vector<double> normBig, vector<double> normSmall);
     
-    void initialize(int i_, int j_);
+    void initialize(int i_, int j_, vector<vector<double> > X, vector<vector<double> > Y);
     
 
 };
@@ -60,8 +62,8 @@ vector<double> cellGeo::getNormal(double x1, double x2, double y1, double y2){
     nx = y2 - y1;
     ny = -(x2 - x1);
     
-    norm.pushback(nx);
-    norm.pushback(ny);
+    norm.push_back(nx);
+    norm.push_back(ny);
     
     return norm;
 }
@@ -73,27 +75,27 @@ vector<double> cellGeo::getNormalCenter(vector<double> normBig, vector<double> n
     ave1 = 0.5*(normBig.at(0)+normSmall.at(0));
     ave2 = 0.5*(normBig.at(1)+normSmall.at(1));
     
-    normCenter.pushback(ave1);
-    normCenter.pushback(ave2);
+    normCenter.push_back(ave1);
+    normCenter.push_back(ave2);
     
     return normCenter;
 }
 
-void cellGeo::initialize(int i_, int j_){
+void cellGeo::initialize(int i_, int j_, vector<vector<double> > X, vector<vector<double> > Y){
     xi = i_;
     eta = j_;
     
     // Assuming that X and Y are globally available here, otherwise they will need to be imported in
     // This indexing is done differently than what we had agreed on before. Check in with Mike & Jon about this.
-    x_SE = X[i_][j_]
-    x_SW = X[i_+1][j_]
-    x_NE = X[i_][j_+1]
-    x_NW = X[i_+1][j_+1]
+    x_SE = X[i_][j_];
+    x_SW = X[i_+1][j_];
+    x_NE = X[i_][j_+1];
+    x_NW = X[i_+1][j_+1];
     
-    y_SE = Y[i_][j_]
-    y_SW = Y[i_+1][j_]
-    y_NE = Y[i_][j_+1]
-    y_NW = Y[i_+1][j_+1]
+    y_SE = Y[i_][j_];
+    y_SW = Y[i_+1][j_];
+    y_NE = Y[i_][j_+1];
+    y_NW = Y[i_+1][j_+1];
     
     getArea();
     getCenterPoint();
