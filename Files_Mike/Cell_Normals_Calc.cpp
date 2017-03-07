@@ -14,9 +14,11 @@ void defineSideNormals(std::vector<std::vector<double>> & xCorner, std::vector<s
 
 	double sidelength_x_EAST;
 	double sidelength_y_EAST;
+	double length_EAST;
 
 	double sidelength_x_NORTH;
 	double sidelength_y_NORTH;
+	double length_NORTH;
 
 	for (int i = 1; i<I; i++) {
 		for (int j = 1; j<J; j++) {
