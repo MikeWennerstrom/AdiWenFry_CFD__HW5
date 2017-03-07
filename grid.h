@@ -25,6 +25,8 @@ class grid{
             int lineNum=0;
             xfile.open(xfilename.c_str());
             yfile.open(yfilename.c_str());
+            if(!xfile.good()){std::cout<<"Error Reading x-grid file!\n";}
+            if(!yfile.good()){std::cout<<"Error Reading y-grid file!\n";}
 
             //Figure out size of the csv table
             getline(xfile, readin);
@@ -34,7 +36,7 @@ class grid{
                 getline(xfile, readin);
                 lineNum++;
             }
-            M=lineNum;
+            M=lineNum-1;
             xfile.seekg(0, xfile.beg);//restart xfile from the beginning
 
             //Start Loading in data now that we know how much information there is
